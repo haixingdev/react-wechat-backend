@@ -31,7 +31,7 @@ function mongo(options) {
   }
 
   const mongoPool = genericPool.createPool({
-    create: () => MongoClient.connect(mongoUrl),
+    create: () => MongoClient.connect(mongoUrl,{useUnifiedTopology:true}),
     destroy: client => client.close()
   }, options);
 

@@ -14,7 +14,7 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-body');
 const logger = require('koa-logger');
 const session = require('koa-generic-session');
-const redis = require('koa-redis');
+// const redis = require('koa-redis');
 const koaStatic = require('koa-static');
 const jwt = require('koa-jwt');
 
@@ -24,7 +24,7 @@ const errorHandle = require('./middlewares/error-handle');
 
 const configs = require('./configs');
 
-const redisStore = redis({});
+// const redisStore = redis({});
 
 const app = new Koa();
 
@@ -41,7 +41,7 @@ onerror(app);
 
 // application session
 app.use(session({
-  store: redisStore
+  // store: redisStore
 }));
 
 // mongodb context
@@ -52,6 +52,7 @@ app.use(bodyparser({
   multipart: true,
   urlencoded: true
 }));
+
 app.use(json());
 app.use(logger());
 app.use(koaStatic(path.resolve('./public')));
@@ -78,6 +79,7 @@ app.use(index.routes(), index.allowedMethods());
 app.use(jwt({ secret: configs.secret, cookie: 'jwt' }).unless({ path: [/\/api\/reg/, /\/api\/login/] }));
 // api
 app.use(user.routes(), user.allowedMethods());
+
 // websocket
 websockify(app);
 app.ws.use(websocket.routes()).use(websocket.allowedMethods());
