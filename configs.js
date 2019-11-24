@@ -9,6 +9,7 @@ module.exports = {
     secret: 'test',
     db: 'wechat',
     mongodb: {
+        url:'mongodb+srv://sccc:cloverphp@cluster0-tgrcy.gcp.mongodb.net/wechat?retryWrites=true&w=majority',
         host: 'localhost',
         port: 27017,
         db: 'wechat',
