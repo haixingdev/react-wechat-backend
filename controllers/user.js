@@ -39,7 +39,7 @@ const register = async(ctx, next) => {
     const defaultContacts = ['18958067917', '18958067916'];
     const user = { nick, thumb, userName, password: encryptUsingMd5(password), region, email, phone, group, contacts: defaultContacts };
     const collection = db.collection('user');
-    const result = await collection.insertOne(user);
+    const result = await collection.insert(user);
     if (result.insertedCount > 0) {
       ctx.body = {
         code: 0,
@@ -58,7 +58,7 @@ const register = async(ctx, next) => {
 
       // 添加对话记录
       const c = db.collection('conversation');
-      await c.insertOne({
+      await c.insert({
         phone,
         conversation: {
           '18958067917': {

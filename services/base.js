@@ -90,7 +90,7 @@ class BaseService {
    * @param {Array} docs 要新增加的文档
    * @param {object} opts 选项
    */
-  async insertMany(docs, opts) {
+  async insert(docs, opts) {
     const result = await this.collection.insert(docs, opts);
     return result;
   }
